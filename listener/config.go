@@ -254,7 +254,7 @@ func NewConfig(options *options.CompletedOptions) (*Config, error) {
 
 		handler := schemahandler.NewGRPCHandler()
 
-		srv := grpc.NewServer()
+		srv := grpc.NewServer(grpc.MaxSendMsgSize(16 * 1024 * 1024))
 		sdk.RegisterSchemaHandlerServer(srv, handler)
 		reflection.Register(srv)
 
